@@ -1,6 +1,6 @@
 Logitech Gaming Software
 
-Сенса 1800
+РЎРµРЅСЃР° 1800
 
 https://csmacro.com/how-to-install-logitech-lgs/
 
