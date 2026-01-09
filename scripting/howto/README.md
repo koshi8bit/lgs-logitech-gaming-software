@@ -1,5 +1,10 @@
 # Examples
 
+Запуск скрипта из файлв
+```lua
+data = dofile[[F:\home\koshi8bit\soft\windows\01-main\logitech\scripting\prj\tarkov-buy.lua]]
+```
+---
 Простая покупка в таркове
 ```lua
 local flag
@@ -34,6 +39,30 @@ end
  if (event == "G_PRESSED" and arg == 21 and IsModifierPressed("ctrl")) then
   ColorBreathe()
  end
+```
+---
+Циклическая обработка по одной кнопке
+```lua
+local flag
+
+function OnEvent(event, arg)
+   if event == "MOUSE_BUTTON_PRESSED" and arg == 5 then
+      flag = not flag
+      if flag then
+         repeat
+            -----------------------
+            -- your actions here 
+            OutputLogMessage("repeat\n")
+            Sleep(1000)
+            -----------------------
+            Sleep(15)
+            local prev_flag = flag
+            flag = IsMouseButtonPressed(5)
+         until not prev_flag and flag
+      end
+   end
+end
+
 ```
 ---
 Прост пример из гитхаба
