@@ -23,7 +23,7 @@ function OnEvent(event, arg)
 		OutputLogMessage("Mouse is at %d, %d\n", x, y);
 	end
 
-    if event == "MOUSE_BUTTON_PRESSED" and arg == 5 then
+    if event == "MOUSE_BUTTON_PRESSED" and arg == 11 then
         flag = not flag
         if flag then
             repeat
@@ -34,7 +34,7 @@ function OnEvent(event, arg)
             -----------------------
             Sleep(15)
             local prev_flag = flag
-            flag = IsMouseButtonPressed(5)
+            flag = IsMouseButtonPressed(11)
             until not prev_flag and flag
         end
     end	

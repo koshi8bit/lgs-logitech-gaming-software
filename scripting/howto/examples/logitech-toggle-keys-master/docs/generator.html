@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ToggleKeys</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+<script src="io.js"></script>
+<style>
+.toggle {
+  background: var(--secondary-back-color);
+}
+.center {
+  text-align: center;
+}
+.key-capture {
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: rgba(0,0,0,0.5);
+  transition: 1s ease opacity;
+  pointer-events: none;
+}
+.key-capture[capturing] {
+  opacity: 1;
+  pointer-events: all;
+}
+.key-capture-text {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  background: #0ff;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 5px 0 5px 0;
+  text-align: center;
+  margin-top: -28px;
+}
+.noscript {
+  z-index: 9999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+.noscript-text {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  background: #f00;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  padding: 5px 0 5px 0;
+  text-align: center;
+  margin-top: -28px;
+}
+.interface {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 60%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+}
+.options {
+  flex 0 1 auto;
+}
+.inputs-box {
+  flex 1 1 auto;
+  overflow-y: auto;
+}
+.panel {
+  position: fixed;
+  left: 0px;
+  bottom: 40%;
+  width: 100%;
+  pointer-events: none;
+}
+.panel button,label {
+  pointer-events: all;
+}
+.output {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 40%;
+  width: 100%;
+  display: flex;
+}
+#output-area {
+  flex: 1;
+}
+</style>
+</head>
+<body>
+  <noscript>
+    <div class="noscript">
+      <div class="noscript-text">Sorry javascript is required</div>
+    </div>
+  </noscript>
+  <div class="key-capture">
+    <div class="key-capture-text">Press any key to continue...</div>
+  </div>
+  <input type="checkbox" id="key-modal" class="modal">
+  <div role="dialog" aria-labelledby="dialog-title">
+    <div class="card large warning">
+      <h2 class="section" id="dialog-title">Press any key to continue...</h2>
+    </div>
+  </div>
+  <input type="checkbox" id="download-modal" class="modal">
+  <div role="dialog" aria-labelledby="dialog-title">
+    <div class="card large">
+      <label for="download-modal" class="modal-close"></label>
+      <h3 class="section" id="dialog-title">Enter file name</h3>
+      <br>
+      <input name="download_name" class="section" type="text" placeholder="Filename" value="toggle_keys.lua">
+      <button class="tertiary large" id="download-output">Download</button>
+    </div>
+  </div>
+  <input type="checkbox" id="help-modal" class="modal">
+  <div role="dialog" aria-labelledby="dialog-title">
+    <div class="card large">
+      <label for="help-modal" class="modal-close" ></label>
+      <h3 class="section" id="dialog-title">Help</h3>
+      <div class="section collapse">
+        <input type="checkbox" id="collapse-section1" aria-hidden="true">
+        <label for="collapse-section1" aria-hidden="true">About</label>
+        <div>
+          <p>This page generates a lua script for toggling and tapping keys in the logitech gaming framework.</p>
+        </div>
+        <input type="checkbox" id="collapse-section2" aria-hidden="true">
+        <label for="collapse-section2" aria-hidden="true">Can't input a key</label>
+        <div>
+          <p>If a key you're inputting is not working simply right click on the key box and type in the key code found in Appendix A of the <a target="_blank" href="https://douile.github.io/logitech-toggle-keys/APIDocs.pdf">API documentation</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="interface">
+    <div class="options">
+      <form class="center">
+        <fieldset>
+            <legend>Toggle Keys Script Generator</legend>
+            <label for="device-type">Device type:</label><select name="device-type" value="Keyboard"><option>Keyboard</option><option>Mouse</option></select>
+            <label for="logging">Logging:</label><input name="logging" type="checkbox" value="false"/>
+            <label for="tap-delay">Tap delay:</label><input class="number" name="tap-delay" type="text" value="30"/>
+            <label for="tap-hold-delay">Tap hold time:</label><input class="number" name="tap-hold-delay" type="text" value="10"/>
+        </fieldset>
+      </form>
+    </div>
+    <div class="inputs-box">
+      <div class="inputs container">
+      </div>
+    </div>
+  </div>
+  <div class="panel row center">
+    <div class="col-md">
+      <button id="add-toggle">Add toggle (<span id="toggle-no">0</span>)</button>
+      <button id="copy-output"><span class="icon-edit"></span>Copy</button>
+      <label for="download-modal" class="button"><span class="icon-link"></span>Download</label>
+      <label for="help-modal" class="button"><span class="icon-help"></span>Help</label>
+    </div>
+  </div>
+  <div class="output">
+    <pre id="output-area"></pre>
+  </div>
+  <script src="generator.js"></script>
+</body>

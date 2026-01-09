@@ -77,4 +77,5 @@ end
 ```
 ---
 Прост примеры из гитхаба
-- [examples/LGS_script_template.lua](examples/LGS_script_template.lua)
+- [Мегачел с github Douile/logitech-toggle-keys](examples\logitech-toggle-keys-master\README.md)
+- [LGS_script_template.lua](examples/LGS_script_template.lua)
