@@ -1,3 +1,7 @@
+# Examples
+
+Простая покупка в таркове
+```lua
 local flag
 
 function OnEvent(event, arg)
@@ -23,3 +27,14 @@ function OnEvent(event, arg)
 		OutputLogMessage("Mouse is at %d, %d\n", x, y);
 	end
 end
+```
+---
+Обработка нажатия с кнопкой CTRL
+```lua
+ if (event == "G_PRESSED" and arg == 21 and IsModifierPressed("ctrl")) then
+  ColorBreathe()
+ end
+```
+---
+Прост пример из гитхаба
+[LGS_script_template.lua](examples/LGS_script_template.lua)
