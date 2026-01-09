@@ -54,26 +54,18 @@ end
 ---
 Циклическая обработка по одной кнопке
 ```lua
-local flag
-
 function OnEvent(event, arg)
-    if event == "MOUSE_BUTTON_PRESSED" and arg == 5 then
-        flag = not flag
-        if flag then
-            repeat
-            -----------------------
-            -- your actions here 
-            OutputLogMessage("repeat\n")
-            Sleep(1000)
-            -----------------------
-            Sleep(15)
-            local prev_flag = flag
-            flag = IsMouseButtonPressed(5)
-            until not prev_flag and flag
-        end
-    end
+	OutputLogMessage("event = %s, arg = %s\n", event, arg);
+	local count_ = 0
+	if (event == "MOUSE_BUTTON_PRESSED" and arg == 6) then
+		repeat
+			if IsMouseButtonPressed(3) then break end -- RMB
+			count_ = count_ + 1
+			MoveMouseToVirtual(24000, 40000)
+			Sleep(100)
+		until count_ > 100
+	end
 end
-
 ```
 ---
 Прост примеры из гитхаба
