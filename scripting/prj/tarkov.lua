@@ -13,7 +13,16 @@ function OnEvent(event, arg)
 	-- 	PressAndReleaseMouseButton(1)
     -- end
 
-    if event == "MOUSE_BUTTON_PRESSED" and arg == 11 then
+    if event == "MOUSE_BUTTON_PRESSED" and arg == 6 then
+		PressAndReleaseMouseButton(1)
+		Sleep(50)
+		MoveMouseTo(40233, 29648)
+		PressAndReleaseMouseButton(1)
+		Sleep(5)
+		PressAndReleaseKey("y")
+    end
+
+    if event == "MOUSE_BUTTON_PRESSED" and arg == 4 then
 		MoveMouseTo(60951, 8198)
 		Sleep(10)
 		PressAndReleaseMouseButton(1)
@@ -28,7 +37,7 @@ function OnEvent(event, arg)
 		PressAndReleaseKey("y")
 	end
 	
-	if (event == "MOUSE_BUTTON_PRESSED" and arg == 6) then
+	if (event == "MOUSE_BUTTON_PRESSED" and arg == 9) then
 		SetBacklightColor(0, 255, 0);
 		x, y = GetMousePosition();
 		OutputLogMessage("Mouse is at %d, %d\n", x, y);
